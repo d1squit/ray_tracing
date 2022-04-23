@@ -5,8 +5,8 @@ import pygame
 from PIL import Image
 from upscaling import *
 
-width =	75
-height = 75
+width =	100
+height = 100
 
 fov: float = math.pi / 3
 
@@ -30,7 +30,7 @@ quality = 0.75
 pygame.init()
 pygame.display.set_caption("RayTracing")
 pygame.event.set_allowed([pygame.QUIT, pygame.KEYDOWN, pygame.KEYUP])
-window = pygame.display.set_mode((width, height), pygame.NOFRAME)
+window = pygame.display.set_mode((width * 2, height * 2), pygame.NOFRAME)
 
 fps_clock = pygame.time.Clock()
 
@@ -109,7 +109,6 @@ while (1):
 	elif keys_pressed[pygame.K_RIGHT]: angle.y -= 5
 
 	render(spheres, lights)
-	# upscaled = upscale(res_image)
-	# window.blit(pilImageToSurface(upscaled), (0, 0))
-	window.blit(pilImageToSurface(res_image), (0, 0))
+	upscaled = upscale(res_image)
+	window.blit(pilImageToSurface(upscaled), (0, 0))
 	pygame.display.update()
